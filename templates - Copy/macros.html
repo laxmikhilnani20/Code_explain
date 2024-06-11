@@ -1,0 +1,15 @@
+{% macro generateExplanationText(item) -%}
+    {% if item.type == 'function' %}
+        Function '{{ item.name }}' defined at line {{ item.line }} with parameters {{ item.args|join(', ') }}
+    {% elif item.type == 'for_loop' %}
+        For loop iterating over '{{ item.target }}' starting at line {{ item.line }}
+    {% elif item.type == 'if_statement' %}
+        If statement with condition '{{ item.condition }}' at line {{ item.line }}
+    {% elif item.type == 'while_loop' %}
+        While loop with condition '{{ item.condition }}' at line {{ item.line }}
+    {% elif item.type == 'assignment' %}
+        Assignment of value '{{ item.value }}' to targets '{{ item.targets|join(', ') }}' at line {{ item.line }}
+    {% elif item.type == 'error' %}
+        Error analyzing code: {{ item.message }}
+    {% endif %}
+{%- endmacro %}
